@@ -1,9 +1,12 @@
-import MONITORING from './pages/monitoring';
+import ROUTES from './routes/routes';
+
+import './styles/global.css';
 
 function App() {
+
   return (
     <div className="App">
-      <MONITORING />
+      <ROUTES />
     </div>
   );
 }

@@ -1,0 +1,86 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+.modal_content {
+    background-color: #312D2D;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    width: 400px;
+  }
+  
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h1{
+    color: #2141CA;
+    font-weight: 100;
+    margin-bottom: 15px;
+}
+
+form .input_field {
+  position: relative;
+  width: 250px;
+  height: 44px;
+  line-height: 44px;
+  margin-bottom: 25px;
+}
+
+form .input_field label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  transition: 0.2s all;
+  cursor: text;
+}
+
+form .input_field input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #FFF;
+  box-shadow: none;
+  color: #FFFFFF;
+  background-color: #312D2D;
+}
+
+form .input_field input:invalid {
+  outline: 0;
+}
+
+form .input_field input:focus,
+form .input-field input:valid {
+  border-color: #2141CA;
+}
+
+form .input_field input:focus~label,
+form .input_field input:valid~label {
+  font-size: 14px;
+  top: -24px;
+  color: #2141CA;
+}
