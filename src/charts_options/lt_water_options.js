@@ -4,15 +4,16 @@ const lt_water_options = {
         type: 'radialBar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value < 100) {
-            return '#32CD32'
-        } else if(value > 100 && value < 110) {
+        if (value <= 50) {
+            return '#FF0000'
+        } else if(value > 50 && value < 66) {
             return '#FFFF00'
         } else{
-            return '#FF0000'
+            return '#32CD32'
         }
     }],
     plotOptions: {
@@ -46,7 +47,7 @@ const lt_water_options = {
                 },
                 total: {
                     show: true,
-                    label: '00 BAR',
+                    label: '0 BAR',
                     color: '#FFF',
                     fontSize: '11px',
                     fontFamily: undefined,
@@ -59,7 +60,7 @@ const lt_water_options = {
         text: "LT WATER",
         align: 'center',
         offsetX: 0,
-        offsetY: 0,
+        offsetY: 15,
         floating: false,
         style: {
             fontSize: '12px',

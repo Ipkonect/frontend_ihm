@@ -1,47 +1,84 @@
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-.modal_content {
-    background-color: #312D2D;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    width: 400px;
-  }
-  
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-  
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.panel_container{
+  width: 100%;
+  max-width: 700px;
+  margin: 150px auto;
 }
 
-h1{
-    color: #2141CA;
-    font-weight: 100;
-    margin-bottom: 15px;
+.panel_container .side_nav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #1E90FF;
+  overflow-x: hidden;
+  padding-top: 60px;
 }
 
-form .input_field {
+.panel_container .side_nav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #FFF;
+  display: block;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.panel_container .side_nav a:hover {
+  color: #111;
+}
+
+.panel_container .side_nav .close_button {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.panel_container .modal_add_user {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 200px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+  
+.panel_container .modal_add_user .modal_content {
+  background-color: #312D2D;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 80%;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.panel_container .modal_delete_user {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 200px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.panel_container .modal_add_user .modal_content form .input_field {
   position: relative;
   width: 250px;
   height: 44px;
@@ -49,7 +86,7 @@ form .input_field {
   margin-bottom: 25px;
 }
 
-form .input_field label {
+.panel_container .modal_add_user .modal_content form .input_field label {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,7 +95,7 @@ form .input_field label {
   cursor: text;
 }
 
-form .input_field input {
+.panel_container .modal_add_user .modal_content form .input_field input {
   width: 100%;
   border: 0;
   outline: 0;
@@ -69,18 +106,234 @@ form .input_field input {
   background-color: #312D2D;
 }
 
-form .input_field input:invalid {
+.panel_container .modal_add_user .modal_content form .input_field input:invalid {
   outline: 0;
 }
 
-form .input_field input:focus,
-form .input-field input:valid {
-  border-color: #2141CA;
+.panel_container .modal_add_user .modal_content form .input_field input:focus,
+.panel_container .modal_add_user .modal_content form .input-field input:valid {
+  border-color: #1E90FF;
 }
 
-form .input_field input:focus~label,
-form .input_field input:valid~label {
+.panel_container .modal_add_user .modal_content form .input_field input:focus~label,
+.panel_container .modal_add_user .modal_content form .input_field input:valid~label {
   font-size: 14px;
-  top: -24px;
-  color: #2141CA;
+  top: -25px;
+  color: #1E90FF;
 }
+
+.panel_container .modal_add_user .modal_content .error{
+  margin-bottom: 15px; 
+  font-size: 13px; 
+  display: none;
+  color:#FF0000;
+}
+
+.panel_container .modal_add_user .modal_content .button_close_modal_add_user{
+  border: none; 
+  padding: 10px; 
+  margin-right: 10px; 
+  background-color: #FF0000; 
+  color: #FFF; 
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.panel_container .modal_add_user .modal_content .button_add_user{
+  border: none;
+  padding: 10px; 
+  background-color: #32CD32; 
+  color: #FFF; 
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.panel_container .modal_delete_user .modal_content {
+  background-color: #312D2D;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 80%;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.panel_container .modal_delete_user .modal_content p{
+  font-size: 20px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.panel_container .modal_delete_user .modal_content .button_close_modal_delete_user{
+  border: none; 
+  padding: 10px; 
+  margin-right: 10px; 
+  background-color: #1E90FF; 
+  color: #FFF; 
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.panel_container .modal_delete_user .modal_content .button_delete_user{
+  border: none;
+  padding: 10px; 
+  background-color:#FF0000; 
+  color: #FFF; 
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.panel_container .panel{
+  display: flex; 
+  flex-direction: column; 
+  background-color: #1E90FF; 
+  padding: 20px; 
+  color: #FFF;
+}
+
+.panel_container .panel .panel_header{
+  display: flex; 
+  align-items: center;
+  justify-content: space-between; 
+  margin-bottom: 10px;
+}
+
+.panel_container .panel .panel_header .button_open_modal_add_user{
+  border: none; 
+  padding: 8px; 
+  background-color: #32CD32; 
+  color: #FFF; 
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.panel_container .panel table{
+  width: 100%; 
+  border-collapse: collapse; 
+  border: 2px solid #FFF
+}
+
+.panel_container .panel table tr th, td{
+  padding: 10px; 
+  font-size: 15px; 
+  border: 2px solid #FFF;
+}
+
+.panel_container .panel table tr td .button_open_modal_delete_user{
+  background-color: #FF0000; 
+  border: none; 
+  padding: 10px; 
+  margin-right: 10px; 
+  color: #FFF;
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.panel_container .panel table tr td .button_open_modal_update_user{
+  background-color: #FFA500; 
+  border: none; 
+  padding: 10px; 
+  margin-right: 10px; 
+  color: #FFF; 
+  cursor: pointer ;
+  font-weight: bold;
+}
+
+.panel_container .menu_button{
+  position: absolute;
+  top: 8px;
+  right: 5px; 
+  border: none; 
+  padding: 10px; 
+  cursor: pointer; 
+  background-color: #1E90FF;
+  color: #FFF;
+  font-weight: bold;
+}
+
+#snackbar_user_register_error {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color:#FF0000;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar_user_register_error.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+#snackbar_user_register_success {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #32CD32;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar_user_register_success.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+#snackbar_user_deleted_success {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #32CD32;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar_user_deleted_success.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+

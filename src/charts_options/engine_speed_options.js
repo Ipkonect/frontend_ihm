@@ -4,7 +4,8 @@ const engine_speed_options = {
         type: 'radialBar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
         if (value <= 100) {
@@ -59,7 +60,7 @@ const engine_speed_options = {
         text: "ENGINE SPEED",
         align: 'center',
         offsetX: 0,
-        offsetY: 0,
+        offsetY: 25,
         floating: false,
         style: {
             fontSize: '14px',

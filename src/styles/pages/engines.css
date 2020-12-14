@@ -1,73 +1,177 @@
-.modal {
-    display: none;
-    position: fixed; 
-    z-index: 2;
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4);
-}
-  
-.modal_content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-  
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-  
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.engine_container{
+    display: flex; 
+    margin-top: 100px;
+    align-items: center;
+    flex-direction: column;
 }
 
-.side_nav {
+.engine_container .side_nav {
     height: 100%;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #1E90FF;
     overflow-x: hidden;
     padding-top: 60px;
 }
   
-.side_nav a {
+.engine_container .side_nav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 20px;
     color: #FFF;
     display: block;
     transition: 0.3s;
+    cursor: pointer;
 }
   
-.side_nav a:hover {
+.engine_container .side_nav a:hover {
     color: #111;
 }
   
-.side_nav .close_button {
+.engine_container .side_nav .close_button {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
 }
+
+.engine_container .engine_data_charts{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 1fr 300px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+    grid-template-areas:
+        'part_1 part_2'
+        'part_3 part_4';
+}
+
+.engine_container .engine_data_charts .engine_info_part_1{
+    grid-area: part_1;
+    display: flex;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power .active_power{
+    background-color: #1E90FF;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power .active_power p{
+    font-size: 20px;
+    font-weight: bold;
+    color:#FFFFFF;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power #card #chart_engine_speed{
+    width: 300px;
+    height: 250px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power .tcs{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power .tcs .tc{
+    background-color: #1E90FF;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .enigne_speed_tca_tcb_power .tcs .tc p{
+    font-size: 20px;
+    font-weight: bold;
+    color:#FFFFFF;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .gauge_charts{
+    display: flex;
+    flex-direction: column;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .gauge_charts .line_1, .line_2, .line_3{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .gauge_charts .line_1 #card 
+#chart_lo_pressure, 
+#chart_fuel_oi, 
+#chart_starting_air{
+    width: 150px;
+    height: 140px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .gauge_charts .line_2 #card 
+#chart_control_air,
+#chart_charge_air,
+#chart_lt_water{
+    width: 150px;
+    height: 140px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_1 .gauge_charts .line_3 #card 
+#chart_ht_water,
+#chart_ht_water_temp,
+#chart_charge_air_temp{
+    width: 150px;
+    height: 140px;
+}
+
+
+.engine_container .engine_data_charts .engine_info_part_2{
+    grid-area: part_2;
+}
+
+.engine_container .engine_data_charts .engine_info_part_2 #chart_temp_averange, #chart_temp_before{
+    width: 300px;
+}
+
+.engine_container .engine_data_charts .engine_info_part_3{
+    grid-area: part_3;
+}
+
+.engine_container .engine_data_charts .engine_info_part_4{
+    grid-area: part_4;
+}
+
+.engine_container .engine_data_charts .engine_info_part_4 #chart_temp_after{
+    width: 300px;
+}
+
+.engine_container .menu_button{
+    position: absolute;
+    top: 8px;
+    right: 5px; 
+    border: none; 
+    padding: 10px; 
+    cursor: pointer; 
+    background-color: #1E90FF;
+    color: #FFF;
+    font-weight: bold;
+}
   
 @media screen and (max-height: 450px) {
-    .side_nav {padding-top: 15px;}
-    .side_nav a {font-size: 18px;}
+    .engine_container .side_nav {padding-top: 15px;}
+    .engine_container .side_nav a {font-size: 18px;}
 }

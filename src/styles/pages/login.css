@@ -12,7 +12,7 @@
 }
 
 .container_login h1{
-    color: #2141CA;
+    color:#1E90FF;
     font-weight: 100;
     margin-bottom: 15px;
 }
@@ -51,21 +51,21 @@
 
 .container_login form .input_field input:focus,
 .container_login form .input-field input:valid {
-  border-color: #2141CA;
+  border-color:#1E90FF;
 }
 
 .container_login form .input_field input:focus~label,
 .container_login form .input_field input:valid~label {
   font-size: 14px;
   top: -24px;
-  color: #2141CA;
+  color:#1E90FF;
 }
 
 .container_login form button {
   display: inline-flex;
   height: 40px;
   width: 150px;
-  border: 2px solid #2141CA;
+  border: 2px solid#1E90FF;
   margin-top: 15px;
   background-color: #312D2D;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
   width: 100%;
   height: 100%;
   left: -200px;
-  background: #2141CA;
+  background:#1E90FF;
   position: absolute;
   transition: all .35s ease-Out;
   bottom: 0;

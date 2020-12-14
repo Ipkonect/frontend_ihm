@@ -4,12 +4,13 @@ const ht_water_temp_options = {
         type: 'radialBar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value < 100) {
+        if (value <= 75) {
             return '#32CD32'
-        } else if(value > 100 && value < 110) {
+        } else if(value > 75 && value <= 80) {
             return '#FFFF00'
         } else{
             return '#FF0000'
@@ -46,7 +47,7 @@ const ht_water_temp_options = {
                 },
                 total: {
                     show: true,
-                    label: '00 °C',
+                    label: '0 °C',
                     color: '#FFF',
                     fontSize: '11px',
                     fontFamily: undefined,
@@ -59,7 +60,7 @@ const ht_water_temp_options = {
         text: "HT WATER TEMP",
         align: 'center',
         offsetX: 0,
-        offsetY: 0,
+        offsetY: 15,
         floating: false,
         style: {
             fontSize: '12px',

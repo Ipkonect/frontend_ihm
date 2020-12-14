@@ -10,7 +10,8 @@ const a_and_b_options = {
         type: 'bar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     plotOptions: {
         bar: {

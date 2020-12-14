@@ -20,15 +20,14 @@ import charge_air_temp_options from '../charts_options/charge_air_temp_options';
 import bancks_options from '../charts_options/bancks_options';
 
 import '../styles/pages/engines.css'
-import { getSuggestedQuery } from '@testing-library/react';
 
 Number.prototype.pad = function (size) {
-    var s = String(this);
+    let s = String(this);
     while (s.length < (size || 2)) { s = "0" + s; }
     return s;
 }
 
-function Engine_1() {
+function Engine_1({ history }) {
 
     const [a_and_b_chart, set_a_and_b_chart] = useState(a_and_b_options);
     const [temp_avarenge_chart, set_temp_avarenge_chart] = useState(bancks_options);
@@ -44,9 +43,9 @@ function Engine_1() {
     const [ht_water_chart, set_ht_water_chart] = useState(ht_water_options);
     const [ht_water_temp_chart, set_ht_water_temp_chart] = useState(ht_water_temp_options);
     const [charge_air_temp_chart, set_charge_air_temp_chart] = useState(charge_air_temp_options);
-    const [tca, set_tca] = useState('00000');
-    const [tcb, set_tcb] = useState('00000');
-    const [active_power, set_active_power] = useState('00000');
+    const [tca, set_tca] = useState('0');
+    const [tcb, set_tcb] = useState('0');
+    const [active_power, set_active_power] = useState('0');
 
     const nav_ref = useRef(null);
 
@@ -68,36 +67,36 @@ function Engine_1() {
 
         const get_json_data = await api.get('get_json_data');
 
-        set_tca((get_json_data.data.result_m1.TC_A).pad(5));
-        set_tcb((get_json_data.data.result_m1.TC_B).pad(5));
-        set_active_power((get_json_data.data.result_m1.PMU_KW).pad(5));
+        set_tca(get_json_data.data.result_m2.TC_A);
+        set_tcb(get_json_data.data.result_m2.TC_B);
+        set_active_power(get_json_data.data.result_m2.PMU_KW);
 
-        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m1.EngineSpeed.pad(3)).toFixed(2)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.EngineSpeed} RPM` } } } } });
-        set_lo_pressure_chart({ series: [value_to_percent(get_json_data.data.result_m1.LO_Pressure, 10)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.LO_Pressure} BAR` } } } } });
-        set_fuel_oil_chart({ series: [value_to_percent(get_json_data.data.result_m1.FuelOil, 16)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.FuelOil} BAR` } } } } });
-        set_starting_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.StartAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.StartAir} BAR` } } } } });
-        set_control_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.CtrlAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.CtrlAir} BAR` } } } } });
-        set_charge_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.ChargeAir, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.ChargeAir} BAR` } } } } });
-        set_lt_water_chart({ series: [value_to_percent(get_json_data.data.result_m1.LT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.LT_Water} BAR` } } } } });
-        set_ht_water_chart({ series: [value_to_percent(get_json_data.data.result_m1.HT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.HT_Water} BAR` } } } } });
-        set_ht_water_temp_chart({ series: [value_to_percent(get_json_data.data.result_m1.HT_WaterTemp, 120)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.HT_WaterTemp} °C` } } } } });
-        set_charge_air_temp_chart({ series: [value_to_percent(get_json_data.data.result_m1.ChargeAirTemp, 90)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.ChargeAirTemp} °C` } } } } });
+        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m2.EngineSpeed).toFixed(2)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.EngineSpeed} RPM` } } } } });
+        set_lo_pressure_chart({ series: [value_to_percent(get_json_data.data.result_m2.LO_Pressure, 10)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.LO_Pressure} BAR` } } } } });
+        set_fuel_oil_chart({ series: [value_to_percent(get_json_data.data.result_m2.FuelOil, 16)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.FuelOil} BAR` } } } } });
+        set_starting_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.StartAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.StartAir} BAR` } } } } });
+        set_control_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.CtrlAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.CtrlAir} BAR` } } } } });
+        set_charge_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.ChargeAir, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.ChargeAir} BAR` } } } } });
+        set_lt_water_chart({ series: [value_to_percent(get_json_data.data.result_m2.LT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.LT_Water} BAR` } } } } });
+        set_ht_water_chart({ series: [value_to_percent(get_json_data.data.result_m2.HT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.HT_Water} BAR` } } } } });
+        set_ht_water_temp_chart({ series: [value_to_percent(get_json_data.data.result_m2.HT_WaterTemp, 120)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.HT_WaterTemp} °C` } } } } });
+        set_charge_air_temp_chart({ series: [value_to_percent(get_json_data.data.result_m2.ChargeAirTemp, 90)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.ChargeAirTemp} °C` } } } } });
 
         set_a_and_b_chart({
             series: [{
                 name: 'A',
-                data: [get_json_data.data.result_m1.A1, get_json_data.data.result_m1.A2, get_json_data.data.result_m1.A3, get_json_data.data.result_m1.A4, get_json_data.data.result_m1.A5, get_json_data.data.result_m1.A6, get_json_data.data.result_m1.A7, get_json_data.data.result_m1.A8, get_json_data.data.result_m1.A9]
+                data: [get_json_data.data.result_m2.A1, get_json_data.data.result_m2.A2, get_json_data.data.result_m2.A3, get_json_data.data.result_m2.A4, get_json_data.data.result_m2.A5, get_json_data.data.result_m2.A6, get_json_data.data.result_m2.A7, get_json_data.data.result_m2.A8, get_json_data.data.result_m2.A9]
             },
             {
                 name: 'B',
-                data: [get_json_data.data.result_m1.B1, get_json_data.data.result_m1.B2, get_json_data.data.result_m1.B3, get_json_data.data.result_m1.B4, get_json_data.data.result_m1.B5, get_json_data.data.result_m1.B6, get_json_data.data.result_m1.B7, get_json_data.data.result_m1.B8, get_json_data.data.result_m1.B9]
+                data: [get_json_data.data.result_m2.B1, get_json_data.data.result_m2.B2, get_json_data.data.result_m2.B3, get_json_data.data.result_m2.B4, get_json_data.data.result_m2.B5, get_json_data.data.result_m2.B6, get_json_data.data.result_m2.B7, get_json_data.data.result_m2.B8, get_json_data.data.result_m2.B9]
             }]
         });
 
         set_temp_avarenge_chart({
             series: [{
                 name: 'EXH. TEMP AVARENGE',
-                data: [get_json_data.data.result_m1.ATempAverange, get_json_data.data.result_m1.BTempAverange]
+                data: [get_json_data.data.result_m2.ATempAverange, get_json_data.data.result_m2.BTempAverange]
             }], yaxis: { title: { text: 'EXH. TEMP AVARENGE', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' } }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' }, }, },
             xaxis: {
                 labels: {
@@ -109,13 +108,13 @@ function Engine_1() {
                         cssClass: 'apexcharts-xaxis-label',
                     },
                 },
-            }
+            },
         });
 
         set_temp_after_chart({
             series: [{
                 name: 'EXH. TEMP AFTER',
-                data: [get_json_data.data.result_m1.ATempAfter, get_json_data.data.result_m1.BTempAfter]
+                data: [get_json_data.data.result_m2.ATempAfter, get_json_data.data.result_m2.BTempAfter]
             }], yaxis: { title: { text: 'EXH. TEMP AFTER', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' }, }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' }, } },
             xaxis: {
                 labels: {
@@ -133,7 +132,7 @@ function Engine_1() {
         set_temp_before_chart({
             series: [{
                 name: 'EXH. TEMP BEFORE',
-                data: [get_json_data.data.result_m1.ATempBefore, get_json_data.data.result_m1.BTempBefore]
+                data: [get_json_data.data.result_m2.ATempBefore, get_json_data.data.result_m2.BTempBefore]
             }], yaxis: { title: { text: 'EXH. TEMP BEFORE', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' } }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' } } },
             xaxis: {
                 labels: {
@@ -152,10 +151,9 @@ function Engine_1() {
     useEffect(() => {
 
         setInterval(() => {
+                get_data_engine();
+        }, 5000);
 
-            get_data_engine();
-
-        }, 2000);
     }, [])
 
     function open_nav() {
@@ -168,110 +166,112 @@ function Engine_1() {
 
     return (
         <Fragment >
-            <div style={{ padding: "10px" }}>
-                <div className="side_nav" ref={nav_ref} style={{ backgroundColor: "#2141CA" }} >
-                    <a href="javascript:void(0)" className="close_button" onClick={close_nav} >&times;</a>
+            <div className="engine_container">
+                <div className="side_nav" ref={nav_ref}>
+                    <a className="close_button" onClick={close_nav}>&times;</a>
                     <Link to="/engine_1">MOTOR 1</Link>
                     <Link to="/engine_2">MOTOR 2</Link>
                     <Link to="/engine_3">MOTOR 3</Link>
                     <Link to="/panel">PAINEL</Link>
-                    <a href="javascript:void(0)" onClick={logout}>SAIR</a>
+                    <a onClick={logout}>SAIR</a>
                 </div>
-                <div style={{ display: "flex" }}>
-                    <div style={{ display: "flex", padding: "10px", height: "60px", flexDirection: "column", alignItems: "center", color: "#FFF", backgroundColor: "#2141CA" }}>
-                        <p style={{ fontSize: "15px" }}>ACTIVE POWER</p>
-                        <p style={{ fontSize: "20px" }}>{active_power} KWH</p>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", padding: "10px" }}>
+                <div className="engine_data_charts">
+                    <div className="engine_info_part_1">
+                        <div className="enigne_speed_tca_tcb_power">
+                            <div className="active_power">
+                                <p>ACTIVE POWER</p>
+                                <p>{active_power} kWh</p>
+                            </div>
                             <div id="card">
-                                <div id="chart" style={{ width: "200px", height: "200px" }}>
-                                    <ReactApexChart options={engine_speed_chart} series={engine_speed_chart.series} type="radialBar" height={250} />
+                                <div id="chart_engine_speed">
+                                    <ReactApexChart options={engine_speed_chart} series={engine_speed_chart.series} type="radialBar" height={300} />
                                 </div>
                             </div>
-                            <div style={{ display: "flex", marginTop: "20px" }}>
-                                <div style={{ display: "flex", padding: "10px", height: "60px", flexDirection: "column", alignItems: "center", border: "1px solid #2141CA", color: "#2141CA", color: "#FFF", backgroundColor: "#2141CA", margin: "5px" }}>
-                                    <p style={{ fontSize: "15px" }}>TC-A</p>
-                                    <p style={{ fontSize: "20px" }}>{tca} RPM</p>
+                            <div className="tcs">
+                                <div className="tc">
+                                    <p>TC-A X 1000</p>
+                                    <p>{tca} RPM</p>
                                 </div>
-                                <div style={{ display: "flex", padding: "10px", height: "60px", flexDirection: "column", alignItems: "center", border: "1px solid #2141CA", color: "#2141CA", color: "#FFF", backgroundColor: "#2141CA", margin: "5px" }}>
-                                    <p style={{ fontSize: "15px" }}>TC-B</p>
-                                    <p style={{ fontSize: "20px" }}>{tcb} RPM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", flexDirection: "column", marginLeft: "50px" }} >
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={lo_pressure_chart} series={lo_pressure_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={fuel_oil_chart} series={fuel_oil_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={starting_air_chart} series={starting_air_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={control_air_chart} series={control_air_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={charge_air_chart} series={charge_air_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={lt_water_chart} series={lt_water_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={ht_water_chart} series={ht_water_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={ht_water_temp_chart} series={ht_water_temp_chart.series} type="radialBar" height={130} />
-                                    </div>
-                                </div>
-                                <div id="card">
-                                    <div id="chart" style={{ width: "130px", height: "130px" }}>
-                                        <ReactApexChart options={charge_air_temp_chart} series={charge_air_temp_chart.series} type="radialBar" height={130} />
-                                    </div>
+                                <div className="tc">
+                                    <p>TC-B X 1000</p>
+                                    <p>{tcb} RPM</p>
                                 </div>
                             </div>
                         </div>
-                        <div style={{ marginLeft: "45px" }}>
-                            <div id="chart" style={{ width: "300px" }}>
-                                <ReactApexChart options={temp_avarenge_chart} series={temp_avarenge_chart.series} type="bar" height={200} />
+                        <div className="gauge_charts">
+                            <div className="line_1">
+                                <div id="card">
+                                    <div id="chart_lo_pressure">
+                                        <ReactApexChart options={lo_pressure_chart} series={lo_pressure_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_fuel_oi">
+                                        <ReactApexChart options={fuel_oil_chart} series={fuel_oil_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_starting_air">
+                                        <ReactApexChart options={starting_air_chart} series={starting_air_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
                             </div>
-                            <div id="chart" style={{ width: "300px", marginTop: "3px" }}>
-                                <ReactApexChart options={temp_after_chart} series={temp_after_chart.series} type="bar" height={200} />
+                            <div className="line_2">
+                                <div id="card">
+                                    <div id="chart_control_air">
+                                        <ReactApexChart options={control_air_chart} series={control_air_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_charge_air">
+                                        <ReactApexChart options={charge_air_chart} series={charge_air_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_lt_water">
+                                        <ReactApexChart options={lt_water_chart} series={lt_water_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
                             </div>
+                            <div className="line_3">
+                                <div id="card">
+                                    <div id="chart_ht_water">
+                                        <ReactApexChart options={ht_water_chart} series={ht_water_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_ht_water_temp">
+                                        <ReactApexChart options={ht_water_temp_chart} series={ht_water_temp_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                                <div id="card">
+                                    <div id="chart_charge_air_temp">
+                                        <ReactApexChart options={charge_air_temp_chart} series={charge_air_temp_chart.series} type="radialBar" height={150} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="engine_info_part_2">
+                        <div id="chart_temp_averange">
+                            <ReactApexChart options={temp_avarenge_chart} series={temp_avarenge_chart.series} type="bar" height={200} />
+                        </div>
+                        <div id="chart_temp_before">
+                            <ReactApexChart options={temp_before_chart} series={temp_before_chart.series} type="bar" height={200} />
+                        </div>
+                    </div>
+                    <div className="engine_info_part_3">
+                        <div id="chart_bancks">
+                            <ReactApexChart options={a_and_b_chart} series={a_and_b_chart.series} type="bar" height={200} />
+                        </div>
+                    </div>
+                    <div className="engine_info_part_4">
+                        <div id="chart_temp_after">
+                            <ReactApexChart options={temp_after_chart} series={temp_after_chart.series} type="bar" height={200} />
                         </div>
                     </div>
                 </div>
-                <div style={{ display: "flex" }}>
-                    <div id="chart" style={{ width: "800px" }}>
-                        <ReactApexChart options={a_and_b_options} series={a_and_b_chart.series} type="bar" height={200} />
-                    </div>
-                    <div id="chart" style={{ width: "300px", marginLeft: "115px", marginTop: "3px" }}>
-                        <ReactApexChart options={temp_before_chart} series={temp_before_chart.series} type="bar" height={200} />
-                    </div>
-                </div>
-                <button onClick={open_nav} style={{ position: "absolute", top: "8px", right: "5px", border: "none", padding: "10px", cursor: "pointer", backgroundColor: "#2141CA", color: "#FFF" }}>
+                <button onClick={open_nav} className="menu_button">
                     MENU
                 </button>
             </div>

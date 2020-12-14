@@ -7,7 +7,8 @@ const banck_options = {
         type: 'bar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     xaxis: {
         categories: ['A-BANCK', 'B-BANCK'],
@@ -94,8 +95,8 @@ const banck_options = {
         y: {
             formatter: function (val) {
                 return val + ' °C'
-            }
-        }
+            }, 
+        },
     }
 };
 

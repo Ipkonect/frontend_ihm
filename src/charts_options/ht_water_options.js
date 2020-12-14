@@ -4,15 +4,20 @@ const ht_water_options = {
         type: 'radialBar',
         toolbar: {
             show: false
-        }
+        },
+        fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value < 100) {
-            return '#32CD32'
-        } else if(value > 100 && value < 110) {
-            return '#FFFF00'
-        } else{
-            return '#FF0000'
+        if (value <= 17) {
+            return '#FF0000';
+        } else if(value > 17 && value <= 34) {
+            return '#FFFF00';
+        } else if(value > 34 && value <= 66){
+            return '#32CD32';
+        }else if(value > 66 && value <= 84){
+            return '#FFFF00';
+        }else{
+            return '#FF0000';
         }
     }],
     plotOptions: {
@@ -46,7 +51,7 @@ const ht_water_options = {
                 },
                 total: {
                     show: true,
-                    label: '00 BAR',
+                    label: '0 BAR',
                     color: '#FFF',
                     fontSize: '11px',
                     fontFamily: undefined,
@@ -59,7 +64,7 @@ const ht_water_options = {
         text: "HT WATER",
         align: 'center',
         offsetX: 0,
-        offsetY: 0,
+        offsetY: 15,
         floating: false,
         style: {
             fontSize: '12px',
