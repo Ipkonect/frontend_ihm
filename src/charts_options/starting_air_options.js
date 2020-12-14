@@ -8,9 +8,9 @@ const starting_air_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 37.5) {
+        if (value < 25) {
             return '#FF0000'
-        } else if(value > 37.5 && value <= 50) {
+        } else if(value > 25 && value < 45) {
             return '#FFFF00'
         } else{
             return '#32CD32'
@@ -57,7 +57,7 @@ const starting_air_options = {
         }
     },
     title: {
-        text: "STARTING AIR",
+        text: "STARTING AIR PRESS",
         align: 'center',
         offsetX: 0,
         offsetY: 15,

@@ -8,13 +8,13 @@ const ht_water_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 17) {
+        if (value < 25) {
             return '#FF0000';
-        } else if(value > 17 && value <= 34) {
+        } else if(value > 25 && value < 33.33) {
             return '#FFFF00';
-        } else if(value > 34 && value <= 66){
+        } else if(value > 33.33 && value < 58.33){
             return '#32CD32';
-        }else if(value > 66 && value <= 84){
+        }else if(value > 58.33 && value < 66.66){
             return '#FFFF00';
         }else{
             return '#FF0000';
@@ -61,7 +61,7 @@ const ht_water_options = {
         }
     },
     title: {
-        text: "HT WATER",
+        text: "HT WATER PRESS",
         align: 'center',
         offsetX: 0,
         offsetY: 15,

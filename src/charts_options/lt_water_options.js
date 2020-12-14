@@ -8,9 +8,9 @@ const lt_water_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 50) {
+        if (value < 25) {
             return '#FF0000'
-        } else if(value > 50 && value < 66) {
+        } else if(value > 25 && value < 33.33) {
             return '#FFFF00'
         } else{
             return '#32CD32'
@@ -57,7 +57,7 @@ const lt_water_options = {
         }
     },
     title: {
-        text: "LT WATER",
+        text: "LT WATER PRESS",
         align: 'center',
         offsetX: 0,
         offsetY: 15,

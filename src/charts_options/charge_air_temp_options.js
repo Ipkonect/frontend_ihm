@@ -8,9 +8,9 @@ const charge_air_temp_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 67) {
+        if (value < 77.77) {
             return '#32CD32'
-        } else if(value > 67 && value < 84) {
+        } else if(value > 77.77 && value < 83.33) {
             return '#FFFF00'
         } else{
             return '#FF0000'

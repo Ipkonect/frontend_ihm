@@ -15,21 +15,29 @@ function Panel() {
     const [user_logged, set_user_logged] = useState([]);
     const [user_selected, set_user_selected] = useState({
         user_id: '',
-        usernamae: ''
+        name: '',
+        username: ''
     })
 
     const nav_ref = useRef(null);
     const modal_add_user_ref = useRef(null);
     const modal_delete_user_ref = useRef(null);
+    const modal_update_user_ref = useRef(null);
     const snack_user_register_error_ref = useRef(null);
     const snack_user_register_success_ref = useRef(null);
     const snack_user_deleted_success_ref = useRef(null);
-    const lengh_password_error_ref = useRef(null);
-    const lower_case_password_ref = useRef(null);
-    const upper_case_passoword_ref = useRef(null);
-    const number_password_ref = useRef(null);
-    const white_space_password_ref = useRef(null);
-    const white_space_username_ref = useRef(null);
+    const lengh_password_error_register_ref = useRef(null);
+    const lower_case_password_register_ref = useRef(null);
+    const upper_case_passoword_register_ref = useRef(null);
+    const number_password_register_ref = useRef(null);
+    const white_space_password_register_ref = useRef(null);
+    const white_space_username_register_ref = useRef(null);
+    const lengh_password_error_update_ref = useRef(null);
+    const lower_case_password_update_ref = useRef(null);
+    const upper_case_passoword_update_ref = useRef(null);
+    const number_password_update_ref = useRef(null);
+    const white_space_password_update_ref = useRef(null);
+    const white_space_username_update_ref = useRef(null);
 
     async function get_users() {
         const users_array = await api.get('get_users');
@@ -71,13 +79,13 @@ function Panel() {
 
     function close_modal_add_user() {
         modal_add_user_ref.current.style.display = 'none';
-        lengh_password_error_ref.current.style.display = 'none';
-        lengh_password_error_ref.current.style.display = 'none';
-        lower_case_password_ref.current.style.display = 'none';
-        upper_case_passoword_ref.current.style.display = 'none';
-        number_password_ref.current.style.display = 'none';
-        white_space_password_ref.current.style.display = 'none';
-        white_space_username_ref.current.style.display = 'none';
+        lengh_password_error_register_ref.current.style.display = 'none';
+        lengh_password_error_register_ref.current.style.display = 'none';
+        lower_case_password_register_ref.current.style.display = 'none';
+        upper_case_passoword_register_ref.current.style.display = 'none';
+        number_password_register_ref.current.style.display = 'none';
+        white_space_password_register_ref.current.style.display = 'none';
+        white_space_username_register_ref.current.style.display = 'none';
         set_name('');
         set_username('');
         set_password('');
@@ -88,7 +96,30 @@ function Panel() {
     }
 
     function close_modal_delete_user() {
-        modal_delete_user_ref.current.style.display = 'none'
+        modal_delete_user_ref.current.style.display = 'none';
+    }
+
+
+    function open_modal_update_user() {
+        modal_update_user_ref.current.style.display = 'block';
+        set_name('');
+        set_username('');
+        set_password('');
+    }
+
+    function close_modal_update_user() {
+        modal_update_user_ref.current.style.display = 'none';
+        modal_add_user_ref.current.style.display = 'none';
+        lengh_password_error_update_ref.current.style.display = 'none';
+        lengh_password_error_update_ref.current.style.display = 'none';
+        lower_case_password_update_ref.current.style.display = 'none';
+        upper_case_passoword_update_ref.current.style.display = 'none';
+        number_password_update_ref.current.style.display = 'none';
+        white_space_password_update_ref.current.style.display = 'none';
+        white_space_username_update_ref.current.style.display = 'none';
+        set_name('');
+        set_username('');
+        set_password('');
     }
 
     function has_white_space(s) {
@@ -97,43 +128,43 @@ function Panel() {
 
     async function register_user() {
 
-        lengh_password_error_ref.current.style.display = 'none';
-        lower_case_password_ref.current.style.display = 'none';
-        upper_case_passoword_ref.current.style.display = 'none';
-        number_password_ref.current.style.display = 'none';
-        white_space_password_ref.current.style.display = 'none';
-        white_space_username_ref.current.style.display = 'none';
+        lengh_password_error_register_ref.current.style.display = 'none';
+        lower_case_password_register_ref.current.style.display = 'none';
+        upper_case_passoword_register_ref.current.style.display = 'none';
+        number_password_register_ref.current.style.display = 'none';
+        white_space_password_register_ref.current.style.display = 'none';
+        white_space_username_register_ref.current.style.display = 'none';
 
         var lower_case_letters = /[a-z]/g;
-        if(!password.match(lower_case_letters)) {  
-            lower_case_password_ref.current.style.display = 'block';
+        if (!password.match(lower_case_letters)) {
+            lower_case_password_register_ref.current.style.display = 'block';
             return;
-        } 
+        }
 
         var upper_case_letters = /[A-Z]/g;
-        if(!password.match(upper_case_letters)) {  
-            upper_case_passoword_ref.current.style.display = 'block';
+        if (!password.match(upper_case_letters)) {
+            upper_case_passoword_register_ref.current.style.display = 'block';
             return;
         }
-      
+
         var numbers = /[0-9]/g;
-        if(!password.match(numbers)) {  
-            number_password_ref.current.style.display = 'block';
-            return;
-        }
-        
-        if(password.length < 6) {
-            lengh_password_error_ref.current.style.display = 'block';
+        if (!password.match(numbers)) {
+            number_password_register_ref.current.style.display = 'block';
             return;
         }
 
-        if(has_white_space(password)){
-            white_space_password_ref.current.style.display = 'block';
+        if (password.length < 6) {
+            lengh_password_error_register_ref.current.style.display = 'block';
             return;
         }
 
-        if(has_white_space(username)){
-            white_space_username_ref.current.style.display = 'block';
+        if (has_white_space(password)) {
+            white_space_password_register_ref.current.style.display = 'block';
+            return;
+        }
+
+        if (has_white_space(username)) {
+            white_space_username_register_ref.current.style.display = 'block';
             return;
         }
 
@@ -141,17 +172,81 @@ function Panel() {
         const new_user = await api.post('register_user', { full_name: name, username, password });
         if (new_user.data.message === 'Usuário já cadastrado') {
             open_snackbar_error_register_user();
-        }else{
+        } else {
             open_snackbar_register_user_success();
             get_users();
         }
 
-        lengh_password_error_ref.current.style.display = 'none';
-        lower_case_password_ref.current.style.display = 'none';
-        upper_case_passoword_ref.current.style.display = 'none';
-        number_password_ref.current.style.display = 'none';
-        white_space_password_ref.current.style.display = 'none';
+        lengh_password_error_register_ref.current.style.display = 'none';
+        lower_case_password_register_ref.current.style.display = 'none';
+        upper_case_passoword_register_ref.current.style.display = 'none';
+        number_password_register_ref.current.style.display = 'none';
+        white_space_password_register_ref.current.style.display = 'none';
     }
+
+    async function update_user() {
+
+        lengh_password_error_update_ref.current.style.display = 'none';
+        lower_case_password_update_ref.current.style.display = 'none';
+        upper_case_passoword_update_ref.current.style.display = 'none';
+        number_password_update_ref.current.style.display = 'none';
+        white_space_password_update_ref.current.style.display = 'none';
+        white_space_username_update_ref.current.style.display = 'none';
+
+        console.log(password.length)
+
+        if (password.length > 0) {
+            var lower_case_letters = /[a-z]/g;
+            if (!password.match(lower_case_letters)) {
+                lower_case_password_update_ref.current.style.display = 'block';
+                return;
+            }
+
+            var upper_case_letters = /[A-Z]/g;
+            if (!password.match(upper_case_letters)) {
+                upper_case_passoword_update_ref.current.style.display = 'block';
+                return;
+            }
+
+            var numbers = /[0-9]/g;
+            if (!password.match(numbers)) {
+                number_password_update_ref.current.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 6) {
+                lengh_password_error_update_ref.current.style.display = 'block';
+                return;
+            }
+
+            if (has_white_space(password)) {
+                white_space_password_update_ref.current.style.display = 'block';
+                return;
+            }
+        }
+
+        if (has_white_space(username)) {
+            white_space_username_update_ref.current.style.display = 'block';
+            return;
+        }
+
+        close_modal_update_user();
+        const update_user = await api.put('update_user', { user_id: user_selected.user_id, full_name: name, username, password });
+        console.log(update_user)
+        if (update_user.data.message === 'Usuário já cadastrado') {
+            open_snackbar_error_register_user();
+        } else {
+            open_snackbar_register_user_success();
+            get_users();
+        }
+
+        lengh_password_error_update_ref.current.style.display = 'none';
+        lower_case_password_update_ref.current.style.display = 'none';
+        upper_case_passoword_update_ref.current.style.display = 'none';
+        number_password_update_ref.current.style.display = 'none';
+        white_space_password_update_ref.current.style.display = 'none';
+    }
+
 
     async function delete_user() {
         await api.post('delete_user', { user_id: user_selected.user_id });
@@ -186,11 +281,14 @@ function Panel() {
             <div className="panel_container">
                 <div className="side_nav" ref={nav_ref}>
                     <a className="close_button" onClick={close_nav}>&times;</a>
-                    <Link to="/engine_1">MOTOR 1</Link>
-                    <Link to="/engine_2">MOTOR 2</Link>
-                    <Link to="/engine_3">MOTOR 3</Link>
-                    <Link to="/panel">PAINEL</Link>
-                    <a onClick={logout}>SAIR</a>
+                    <div className="links">
+                        <Link to="/engine_1">MOTOR 1</Link>
+                        <Link to="/engine_2">MOTOR 2</Link>
+                        <Link to="/engine_3">MOTOR 3</Link>
+                        <Link to="/engines">MOTORES</Link>
+                        <Link to="/panel">PAINEL</Link>
+                        <a onClick={logout}>SAIR</a>
+                    </div>
                 </div>
                 <div className="modal_add_user" ref={modal_add_user_ref}>
                     <div className="modal_content">
@@ -208,12 +306,12 @@ function Panel() {
                                 <label htmlFor="password">SENHA</label>
                             </div>
                         </form>
-                            <p className="error" ref={white_space_username_ref}>NOME DE USUÁRIO NÃO PODE CONTER ESPAÇO</p>
-                            <p className="error" ref={white_space_password_ref}>SENHA NÃO PODE CONTER ESPAÇO</p>
-                            <p className="error" ref={number_password_ref}>SENHA FRACA, ADICIONE NÚMEROS</p>
-                            <p className="error" ref={lower_case_password_ref}>SENHA FRACA, ADICIONE LETRAS MINUSCULAS</p>
-                            <p className="error" ref={upper_case_passoword_ref}>SENHA FRACA, ADICIONE LETRAS MAIUSCULAS</p>
-                            <p className="error" ref={lengh_password_error_ref}>SENHA PRECISA TER NO MINIMO 6 CARACTERES</p>
+                        <p className="error" ref={white_space_username_register_ref}>NOME DE USUÁRIO NÃO PODE CONTER ESPAÇO</p>
+                        <p className="error" ref={white_space_password_register_ref}>SENHA NÃO PODE CONTER ESPAÇO</p>
+                        <p className="error" ref={number_password_register_ref}>SENHA FRACA, ADICIONE NÚMEROS</p>
+                        <p className="error" ref={lower_case_password_register_ref}>SENHA FRACA, ADICIONE LETRAS MINUSCULAS</p>
+                        <p className="error" ref={upper_case_passoword_register_ref}>SENHA FRACA, ADICIONE LETRAS MAIUSCULAS</p>
+                        <p className="error" ref={lengh_password_error_register_ref}>SENHA PRECISA TER NO MINIMO 6 CARACTERES</p>
                         <div>
                             <button onClick={close_modal_add_user} className="button_close_modal_add_user">
                                 CANCELAR
@@ -234,6 +332,38 @@ function Panel() {
                             <button onClick={delete_user} className="button_delete_user">
                                 DELETAR
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="modal_update_user" ref={modal_update_user_ref}>
+                    <div className="modal_content">
+                        <form>
+                            <div className="input_field">
+                                <input type="text" id="full_name" required value={name} onChange={e => set_name(e.target.value)} />
+                                <label htmlFor="full_name">NOME COMPLETO</label>
+                            </div>
+                            <div className="input_field">
+                                <input type="text" id="username" required value={username} onChange={e => set_username(e.target.value)} />
+                                <label htmlFor="username">NOME DE USUÁRIO</label>
+                            </div>
+                            <div className="input_field">
+                                <input type="password" id="password" required value={password} onChange={e => set_password(e.target.value)} />
+                                <label htmlFor="password">SENHA</label>
+                            </div>
+                        </form>
+                        <p className="error" ref={white_space_username_update_ref}>NOME DE USUÁRIO NÃO PODE CONTER ESPAÇO</p>
+                        <p className="error" ref={white_space_password_update_ref}>SENHA NÃO PODE CONTER ESPAÇO</p>
+                        <p className="error" ref={number_password_update_ref}>SENHA FRACA, ADICIONE NÚMEROS</p>
+                        <p className="error" ref={lower_case_password_update_ref}>SENHA FRACA, ADICIONE LETRAS MINUSCULAS</p>
+                        <p className="error" ref={upper_case_passoword_update_ref}>SENHA FRACA, ADICIONE LETRAS MAIUSCULAS</p>
+                        <p className="error" ref={lengh_password_error_update_ref}>SENHA PRECISA TER NO MINIMO 6 CARACTERES</p>
+                        <div>
+                            <button onClick={close_modal_update_user} className="button_close_modal_update_user">
+                                CANCELAR
+                        </button>
+                            <button onClick={update_user} className="button_update_user">
+                                ATUALIZAR
+                        </button>
                         </div>
                     </div>
                 </div>
@@ -258,7 +388,7 @@ function Panel() {
                                     <tr key={user._id}>
                                         <td>{user.username}</td>
                                         <td>{user.full_name}</td>
-                                        <td>{user.master ? null : <div><button className="button_open_modal_delete_user" onClick={() => { open_modal_delete_user(); set_user_selected({ user_id: user._id, username: user.username }); }}>DELETAR</button><button className="button_open_modal_update_user">EDITAR</button></div>}</td>
+                                        <td>{user.master ? null : <div><button className="button_open_modal_delete_user" onClick={() => { open_modal_delete_user(); set_user_selected({ user_id: user._id, username: user.username }); }}>DELETAR</button><button onClick={() => { open_modal_update_user(); set_user_selected({ user_id: user._id, name: user.full_name, username: user.username }); set_name(user.full_name); set_username(user.username) }} className="button_open_modal_update_user">EDITAR</button></div>}</td>
                                     </tr>
                                 )
                             })}

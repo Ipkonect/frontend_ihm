@@ -29,7 +29,7 @@ function Login({ history }) {
 
         login(get_user_token.data.token);
 
-        history.push('/engine_1');
+        history.push('/engines');
     }
 
     return (

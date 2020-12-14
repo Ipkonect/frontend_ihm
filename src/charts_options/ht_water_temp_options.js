@@ -8,9 +8,9 @@ const ht_water_temp_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 75) {
+        if (value < 79.16) {
             return '#32CD32'
-        } else if(value > 75 && value <= 80) {
+        } else if(value > 79.16 && value < 83.33) {
             return '#FFFF00'
         } else{
             return '#FF0000'

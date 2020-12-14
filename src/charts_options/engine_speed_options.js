@@ -49,7 +49,7 @@ const engine_speed_options = {
                     show: true,
                     label: '0 RPM',
                     color: '#FFFFFF',
-                    fontSize: '16px',
+                    fontSize: '20px',
                     fontFamily: undefined,
                     fontWeight: 600,
                 }

@@ -6,7 +6,8 @@ import ReactApexChart from 'react-apexcharts';
 
 import api from '../services/api';
 
-import a_and_b_options from '../charts_options/a_and_b_options';
+import a_options from '../charts_options/a_options';
+import b_options from '../charts_options/b_options';
 import engine_speed_options from '../charts_options/engine_speed_options';
 import lo_pressure_options from '../charts_options/lo_pressure_options';
 import fuel_oil_options from '../charts_options/fuel_oil_options';
@@ -19,7 +20,7 @@ import ht_water_temp_options from '../charts_options/ht_water_temp_options';
 import charge_air_temp_options from '../charts_options/charge_air_temp_options';
 import bancks_options from '../charts_options/bancks_options';
 
-import '../styles/pages/engines.css'
+import '../styles/pages/engine.css';
 
 Number.prototype.pad = function (size) {
     let s = String(this);
@@ -29,7 +30,8 @@ Number.prototype.pad = function (size) {
 
 function Engine_3({ history }) {
 
-    const [a_and_b_chart, set_a_and_b_chart] = useState(a_and_b_options);
+    const [a_chart, set_a_chart] = useState(a_options);
+    const [b_chart, set_b_chart] = useState(b_options);
     const [temp_avarenge_chart, set_temp_avarenge_chart] = useState(bancks_options);
     const [temp_after_chart, set_temp_after_chart] = useState(bancks_options);
     const [temp_before_chart, set_temp_before_chart] = useState(bancks_options);
@@ -50,7 +52,7 @@ function Engine_3({ history }) {
     const nav_ref = useRef(null);
 
     function value_to_percent_engine_speed(value) {
-        return (value * 120) / 612;
+        return (value * 120) / 616;
     }
 
     function value_to_percent(value, max) {
@@ -71,7 +73,9 @@ function Engine_3({ history }) {
         set_tcb(get_json_data.data.result_m3.TC_B);
         set_active_power(get_json_data.data.result_m3.PMU_KW);
 
-        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m3.EngineSpeed.pad(3)).toFixed(2)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.EngineSpeed} RPM` } } } } });
+        console.log(value_to_percent(75, 90))
+
+        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m3.EngineSpeed).toFixed(0)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.EngineSpeed} RPM` } } } } });
         set_lo_pressure_chart({ series: [value_to_percent(get_json_data.data.result_m3.LO_Pressure, 10)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.LO_Pressure} BAR` } } } } });
         set_fuel_oil_chart({ series: [value_to_percent(get_json_data.data.result_m3.FuelOil, 16)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.FuelOil} BAR` } } } } });
         set_starting_air_chart({ series: [value_to_percent(get_json_data.data.result_m3.StartAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.StartAir} BAR` } } } } });
@@ -82,12 +86,15 @@ function Engine_3({ history }) {
         set_ht_water_temp_chart({ series: [value_to_percent(get_json_data.data.result_m3.HT_WaterTemp, 120)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.HT_WaterTemp} °C` } } } } });
         set_charge_air_temp_chart({ series: [value_to_percent(get_json_data.data.result_m3.ChargeAirTemp, 90)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m3.ChargeAirTemp} °C` } } } } });
 
-        set_a_and_b_chart({
+        set_a_chart({
             series: [{
                 name: 'A',
                 data: [get_json_data.data.result_m3.A1, get_json_data.data.result_m3.A2, get_json_data.data.result_m3.A3, get_json_data.data.result_m3.A4, get_json_data.data.result_m3.A5, get_json_data.data.result_m3.A6, get_json_data.data.result_m3.A7, get_json_data.data.result_m3.A8, get_json_data.data.result_m3.A9]
-            },
-            {
+            }]
+        });
+
+        set_b_chart({
+            series: [{
                 name: 'B',
                 data: [get_json_data.data.result_m3.B1, get_json_data.data.result_m3.B2, get_json_data.data.result_m3.B3, get_json_data.data.result_m3.B4, get_json_data.data.result_m3.B5, get_json_data.data.result_m3.B6, get_json_data.data.result_m3.B7, get_json_data.data.result_m3.B8, get_json_data.data.result_m3.B9]
             }]
@@ -169,11 +176,14 @@ function Engine_3({ history }) {
             <div className="engine_container">
                 <div className="side_nav" ref={nav_ref}>
                     <a className="close_button" onClick={close_nav}>&times;</a>
-                    <Link to="/engine_1">MOTOR 1</Link>
-                    <Link to="/engine_2">MOTOR 2</Link>
-                    <Link to="/engine_3">MOTOR 3</Link>
-                    <Link to="/panel">PAINEL</Link>
-                    <a onClick={logout}>SAIR</a>
+                    <div className="links">
+                        <Link to="/engine_1">MOTOR 1</Link>
+                        <Link to="/engine_2">MOTOR 2</Link>
+                        <Link to="/engine_3">MOTOR 3</Link>
+                        <Link to="/engines">MOTORES</Link>
+                        <Link to="/panel">PAINEL</Link>
+                        <a onClick={logout}>SAIR</a>
+                    </div>
                 </div>
                 <div className="engine_data_charts">
                     <div className="engine_info_part_1">
@@ -189,11 +199,11 @@ function Engine_3({ history }) {
                             </div>
                             <div className="tcs">
                                 <div className="tc">
-                                    <p>TC-A X 1000</p>
+                                    <p>TC-A</p>
                                     <p>{tca} RPM</p>
                                 </div>
                                 <div className="tc">
-                                    <p>TC-B X 1000</p>
+                                    <p>TC-B</p>
                                     <p>{tcb} RPM</p>
                                 </div>
                             </div>
@@ -261,8 +271,11 @@ function Engine_3({ history }) {
                         </div>
                     </div>
                     <div className="engine_info_part_3">
-                        <div id="chart_bancks">
-                            <ReactApexChart options={a_and_b_chart} series={a_and_b_chart.series} type="bar" height={200} />
+                        <div id="chart_a" style={{width: "400px"}}>
+                            <ReactApexChart options={a_chart} series={a_chart.series} type="bar" height={200} />
+                        </div>
+                        <div id="chart_b" style={{width: "400px"}}>
+                            <ReactApexChart options={b_chart} series={b_chart.series} type="bar" height={200} />
                         </div>
                     </div>
                     <div className="engine_info_part_4">

@@ -1,7 +1,7 @@
-const banck_options = {
+const b_options = {
     series: [{
-        name: '',
-        data: [0, 0]
+        name: 'B',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0]
     }],
     chart: {
         type: 'bar',
@@ -10,22 +10,10 @@ const banck_options = {
         },
         fontFamily: 'Roboto Condensed, sans-serif'
     },
-    xaxis: {
-        categories: ['A-BANK', 'B-BANK'],
-        labels: {
-            show: true,
-            style: {
-                colors: ['#FFFFFF', '#FFFFFF'],
-                fontSize: '12px',
-                fontWeight: 400,
-                cssClass: 'apexcharts-xaxis-label',
-            },
-        },
-    },
     plotOptions: {
         bar: {
             horizontal: false,
-            columnWidth: '40%',
+            columnWidth: '80%',
             endingShape: 'flat',
             dataLabels: {
                 position: 'top',
@@ -33,24 +21,21 @@ const banck_options = {
             colors: {
                 ranges: [{
                     from: 0,
-                    to: 700,
+                    to: 500,
                     color: '#32CD32'
                 },{
-                    from: 700,
-                    to: 750,
+                    from: 500,
+                    to: 550,
                     color: '#FFFF00'
                 },
                 {
-                    from: 750,
-                    to: 800,
+                    from: 550,
+                    to: 600,
                     color: '#FF0000'
                 }]
             }
         },
     },
-    colors: [
-        "#C71585", "#32CD32",
-    ],
     dataLabels: {
         enabled: true,
         formatter: function (val) {
@@ -67,13 +52,32 @@ const banck_options = {
         width: 5,
         colors: ['transparent']
     },
+    xaxis: {
+        categories: ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9'],
+        labels: {
+            show: true,
+            style: {
+                colors: ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF'],
+                fontSize: '12px',
+                fontWeight: 400,
+                cssClass: 'apexcharts-xaxis-label',
+            },
+        },
+    },
     legend: {
         show: false
     },
     yaxis: {
         title: {
-            text: '',
+            text: 'CLY# (°C)',
+            style: {
+                color: '#FFFFFF',
+                fontSize: '12px',
+                fontWeight: 600,
+                cssClass: 'apexcharts-yaxis-title',
+            },
         },
+        max: 600,
         labels: {
             show: true,
             style: {
@@ -83,7 +87,6 @@ const banck_options = {
                 cssClass: 'apexcharts-yaxis-label',
             },
         },
-        max: 800,
     },
     fill: {
         opacity: 1
@@ -95,9 +98,9 @@ const banck_options = {
         y: {
             formatter: function (val) {
                 return val + ' °C'
-            }, 
-        },
+            }
+        }
     }
 };
 
-export default banck_options;
+export default b_options;

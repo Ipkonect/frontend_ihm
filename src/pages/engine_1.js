@@ -6,7 +6,8 @@ import ReactApexChart from 'react-apexcharts';
 
 import api from '../services/api';
 
-import a_and_b_options from '../charts_options/a_and_b_options';
+import a_options from '../charts_options/a_options';
+import b_options from '../charts_options/b_options';
 import engine_speed_options from '../charts_options/engine_speed_options';
 import lo_pressure_options from '../charts_options/lo_pressure_options';
 import fuel_oil_options from '../charts_options/fuel_oil_options';
@@ -19,7 +20,7 @@ import ht_water_temp_options from '../charts_options/ht_water_temp_options';
 import charge_air_temp_options from '../charts_options/charge_air_temp_options';
 import bancks_options from '../charts_options/bancks_options';
 
-import '../styles/pages/engines.css'
+import '../styles/pages/engine.css';
 
 Number.prototype.pad = function (size) {
     let s = String(this);
@@ -29,7 +30,8 @@ Number.prototype.pad = function (size) {
 
 function Engine_1({ history }) {
 
-    const [a_and_b_chart, set_a_and_b_chart] = useState(a_and_b_options);
+    const [a_chart, set_a_chart] = useState(a_options);
+    const [b_chart, set_b_chart] = useState(b_options);
     const [temp_avarenge_chart, set_temp_avarenge_chart] = useState(bancks_options);
     const [temp_after_chart, set_temp_after_chart] = useState(bancks_options);
     const [temp_before_chart, set_temp_before_chart] = useState(bancks_options);
@@ -50,7 +52,7 @@ function Engine_1({ history }) {
     const nav_ref = useRef(null);
 
     function value_to_percent_engine_speed(value) {
-        return (value * 120) / 612;
+        return (value * 120) / 616;
     }
 
     function value_to_percent(value, max) {
@@ -67,36 +69,41 @@ function Engine_1({ history }) {
 
         const get_json_data = await api.get('get_json_data');
 
-        set_tca(get_json_data.data.result_m2.TC_A);
-        set_tcb(get_json_data.data.result_m2.TC_B);
-        set_active_power(get_json_data.data.result_m2.PMU_KW);
+        set_tca(get_json_data.data.result_m1.TC_A);
+        set_tcb(get_json_data.data.result_m1.TC_B);
+        set_active_power(get_json_data.data.result_m1.PMU_KW);
 
-        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m2.EngineSpeed).toFixed(2)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.EngineSpeed} RPM` } } } } });
-        set_lo_pressure_chart({ series: [value_to_percent(get_json_data.data.result_m2.LO_Pressure, 10)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.LO_Pressure} BAR` } } } } });
-        set_fuel_oil_chart({ series: [value_to_percent(get_json_data.data.result_m2.FuelOil, 16)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.FuelOil} BAR` } } } } });
-        set_starting_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.StartAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.StartAir} BAR` } } } } });
-        set_control_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.CtrlAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.CtrlAir} BAR` } } } } });
-        set_charge_air_chart({ series: [value_to_percent(get_json_data.data.result_m2.ChargeAir, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.ChargeAir} BAR` } } } } });
-        set_lt_water_chart({ series: [value_to_percent(get_json_data.data.result_m2.LT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.LT_Water} BAR` } } } } });
-        set_ht_water_chart({ series: [value_to_percent(get_json_data.data.result_m2.HT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.HT_Water} BAR` } } } } });
-        set_ht_water_temp_chart({ series: [value_to_percent(get_json_data.data.result_m2.HT_WaterTemp, 120)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.HT_WaterTemp} °C` } } } } });
-        set_charge_air_temp_chart({ series: [value_to_percent(get_json_data.data.result_m2.ChargeAirTemp, 90)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m2.ChargeAirTemp} °C` } } } } });
+        console.log(value_to_percent(75, 90))
 
-        set_a_and_b_chart({
+        set_engine_speed_chart({ series: [value_to_percent_engine_speed(get_json_data.data.result_m1.EngineSpeed).toFixed(0)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.EngineSpeed} RPM` } } } } });
+        set_lo_pressure_chart({ series: [value_to_percent(get_json_data.data.result_m1.LO_Pressure, 10)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.LO_Pressure} BAR` } } } } });
+        set_fuel_oil_chart({ series: [value_to_percent(get_json_data.data.result_m1.FuelOil, 16)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.FuelOil} BAR` } } } } });
+        set_starting_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.StartAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.StartAir} BAR` } } } } });
+        set_control_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.CtrlAir, 40)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.CtrlAir} BAR` } } } } });
+        set_charge_air_chart({ series: [value_to_percent(get_json_data.data.result_m1.ChargeAir, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.ChargeAir} BAR` } } } } });
+        set_lt_water_chart({ series: [value_to_percent(get_json_data.data.result_m1.LT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.LT_Water} BAR` } } } } });
+        set_ht_water_chart({ series: [value_to_percent(get_json_data.data.result_m1.HT_Water, 6)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.HT_Water} BAR` } } } } });
+        set_ht_water_temp_chart({ series: [value_to_percent(get_json_data.data.result_m1.HT_WaterTemp, 120)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.HT_WaterTemp} °C` } } } } });
+        set_charge_air_temp_chart({ series: [value_to_percent(get_json_data.data.result_m1.ChargeAirTemp, 90)], plotOptions: { radialBar: { dataLabels: { total: { label: `${get_json_data.data.result_m1.ChargeAirTemp} °C` } } } } });
+
+        set_a_chart({
             series: [{
                 name: 'A',
-                data: [get_json_data.data.result_m2.A1, get_json_data.data.result_m2.A2, get_json_data.data.result_m2.A3, get_json_data.data.result_m2.A4, get_json_data.data.result_m2.A5, get_json_data.data.result_m2.A6, get_json_data.data.result_m2.A7, get_json_data.data.result_m2.A8, get_json_data.data.result_m2.A9]
-            },
-            {
+                data: [get_json_data.data.result_m1.A1, get_json_data.data.result_m1.A2, get_json_data.data.result_m1.A3, get_json_data.data.result_m1.A4, get_json_data.data.result_m1.A5, get_json_data.data.result_m1.A6, get_json_data.data.result_m1.A7, get_json_data.data.result_m1.A8, get_json_data.data.result_m1.A9]
+            }]
+        });
+
+        set_b_chart({
+            series: [{
                 name: 'B',
-                data: [get_json_data.data.result_m2.B1, get_json_data.data.result_m2.B2, get_json_data.data.result_m2.B3, get_json_data.data.result_m2.B4, get_json_data.data.result_m2.B5, get_json_data.data.result_m2.B6, get_json_data.data.result_m2.B7, get_json_data.data.result_m2.B8, get_json_data.data.result_m2.B9]
+                data: [get_json_data.data.result_m1.B1, get_json_data.data.result_m1.B2, get_json_data.data.result_m1.B3, get_json_data.data.result_m1.B4, get_json_data.data.result_m1.B5, get_json_data.data.result_m1.B6, get_json_data.data.result_m1.B7, get_json_data.data.result_m1.B8, get_json_data.data.result_m1.B9]
             }]
         });
 
         set_temp_avarenge_chart({
             series: [{
                 name: 'EXH. TEMP AVARENGE',
-                data: [get_json_data.data.result_m2.ATempAverange, get_json_data.data.result_m2.BTempAverange]
+                data: [get_json_data.data.result_m1.ATempAverange, get_json_data.data.result_m1.BTempAverange]
             }], yaxis: { title: { text: 'EXH. TEMP AVARENGE', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' } }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' }, }, },
             xaxis: {
                 labels: {
@@ -114,7 +121,7 @@ function Engine_1({ history }) {
         set_temp_after_chart({
             series: [{
                 name: 'EXH. TEMP AFTER',
-                data: [get_json_data.data.result_m2.ATempAfter, get_json_data.data.result_m2.BTempAfter]
+                data: [get_json_data.data.result_m1.ATempAfter, get_json_data.data.result_m1.BTempAfter]
             }], yaxis: { title: { text: 'EXH. TEMP AFTER', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' }, }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' }, } },
             xaxis: {
                 labels: {
@@ -132,7 +139,7 @@ function Engine_1({ history }) {
         set_temp_before_chart({
             series: [{
                 name: 'EXH. TEMP BEFORE',
-                data: [get_json_data.data.result_m2.ATempBefore, get_json_data.data.result_m2.BTempBefore]
+                data: [get_json_data.data.result_m1.ATempBefore, get_json_data.data.result_m1.BTempBefore]
             }], yaxis: { title: { text: 'EXH. TEMP BEFORE', style: { color: '#FFFFFF', fontSize: '12px', fontWeight: 600, cssClass: 'apexcharts-yaxis-title' } }, max: 800, labels: { show: true, style: { colors: ['#FFFFFF'], fontSize: '12px', fontWeight: 400, ncssClass: 'apexcharts-yaxis-label' } } },
             xaxis: {
                 labels: {
@@ -151,7 +158,7 @@ function Engine_1({ history }) {
     useEffect(() => {
 
         setInterval(() => {
-                get_data_engine();
+            get_data_engine();
         }, 5000);
 
     }, [])
@@ -169,11 +176,14 @@ function Engine_1({ history }) {
             <div className="engine_container">
                 <div className="side_nav" ref={nav_ref}>
                     <a className="close_button" onClick={close_nav}>&times;</a>
-                    <Link to="/engine_1">MOTOR 1</Link>
-                    <Link to="/engine_2">MOTOR 2</Link>
-                    <Link to="/engine_3">MOTOR 3</Link>
-                    <Link to="/panel">PAINEL</Link>
-                    <a onClick={logout}>SAIR</a>
+                    <div className="links">
+                        <Link to="/engine_1">MOTOR 1</Link>
+                        <Link to="/engine_2">MOTOR 2</Link>
+                        <Link to="/engine_3">MOTOR 3</Link>
+                        <Link to="/engines">MOTORES</Link>
+                        <Link to="/panel">PAINEL</Link>
+                        <a onClick={logout}>SAIR</a>
+                    </div>
                 </div>
                 <div className="engine_data_charts">
                     <div className="engine_info_part_1">
@@ -189,11 +199,11 @@ function Engine_1({ history }) {
                             </div>
                             <div className="tcs">
                                 <div className="tc">
-                                    <p>TC-A X 1000</p>
+                                    <p>TC-A</p>
                                     <p>{tca} RPM</p>
                                 </div>
                                 <div className="tc">
-                                    <p>TC-B X 1000</p>
+                                    <p>TC-B</p>
                                     <p>{tcb} RPM</p>
                                 </div>
                             </div>
@@ -261,8 +271,11 @@ function Engine_1({ history }) {
                         </div>
                     </div>
                     <div className="engine_info_part_3">
-                        <div id="chart_bancks">
-                            <ReactApexChart options={a_and_b_chart} series={a_and_b_chart.series} type="bar" height={200} />
+                        <div id="chart_a" style={{width: "400px"}}>
+                            <ReactApexChart options={a_chart} series={a_chart.series} type="bar" height={200} />
+                        </div>
+                        <div id="chart_b" style={{width: "400px"}}>
+                            <ReactApexChart options={b_chart} series={b_chart.series} type="bar" height={200} />
                         </div>
                     </div>
                     <div className="engine_info_part_4">

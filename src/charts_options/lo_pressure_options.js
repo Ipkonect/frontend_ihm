@@ -8,9 +8,9 @@ const lo_pressure_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 20) {
+        if (value <= 10) {
             return '#FF0000'
-        } else if(value > 20 && value <= 40) {
+        } else if(value > 20 && value < 30) {
             return '#FFFF00'
         } else{
             return '#32CD32'

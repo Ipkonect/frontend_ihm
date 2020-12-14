@@ -6,6 +6,7 @@ import ENGINE_1_PAGE from '../pages/engine_1';
 import ENGINE_2_PAGE from '../pages/engine_2';
 import ENGINE_3_PAGE from '../pages/engine_3';
 import PANEL_PAGE from '../pages/panel';
+import ENGINES_PAGE from '../pages/engines';
 
 import PRIVATE_ROUTE from './private_routes';
 
@@ -18,6 +19,7 @@ function Routes() {
                 <PRIVATE_ROUTE component={ENGINE_2_PAGE} path="/engine_2" />
                 <PRIVATE_ROUTE component={ENGINE_3_PAGE} path="/engine_3" />
                 <PRIVATE_ROUTE component={PANEL_PAGE} path="/panel" />
+                <PRIVATE_ROUTE component={ENGINES_PAGE} path="/engines" />
             </Switch>
         </BrowserRouter >
     )

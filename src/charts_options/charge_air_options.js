@@ -8,9 +8,9 @@ const charge_air_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 50) {
+        if (value < 58.33) {
             return '#32CD32'
-        } else if(value > 50 && value < 66) {
+        } else if(value > 58.33 && value < 66.66) {
             return '#FFFF00'
         } else{
             return '#FF0000'
@@ -57,7 +57,7 @@ const charge_air_options = {
         }
     },
     title: {
-        text: 'CHARGE AIR',
+        text: 'CHARGE AIR PRESS',
         align: 'center',
         offsetX: 0,
         offsetY: 15,

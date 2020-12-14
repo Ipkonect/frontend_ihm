@@ -1,9 +1,6 @@
-const a_and_b_options = {
+const a_options = {
     series: [{
         name: 'A',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    }, {
-        name: 'B',
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0]
     }],
     chart: {
@@ -56,7 +53,7 @@ const a_and_b_options = {
         colors: ['transparent']
     },
     xaxis: {
-        categories: ['A1 / B1', 'A2 / B2', 'A3 / B3', 'A4 / B4', 'A5 / B5', 'A6 / B6', 'A7 / B7', 'A8 / B8', 'A9 / B9'],
+        categories: ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9'],
         labels: {
             show: true,
             style: {
@@ -106,4 +103,4 @@ const a_and_b_options = {
     }
 };
 
-export default a_and_b_options;
+export default a_options;

@@ -8,9 +8,9 @@ const fuel_oil_options = {
         fontFamily: 'Roboto Condensed, sans-serif'
     },
     colors: [function({ value, seriesIndex, w }) {
-        if (value <= 25) {
+        if (value < 18.75) {
             return '#FF0000'
-        } else if(value > 25 && value <= 37.5) {
+        } else if(value > 18.75 && value < 25) {
             return '#FFFF00'
         } else{
             return '#32CD32'
@@ -57,7 +57,7 @@ const fuel_oil_options = {
         }
     },
     title: {
-        text: 'FUEL OIL',
+        text: 'FUEL OIL PRESS',
         align: 'center',
         offsetX: 0,
         offsetY: 15,

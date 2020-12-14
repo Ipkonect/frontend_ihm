@@ -16,17 +16,22 @@
   padding-top: 60px;
 }
 
-.panel_container .side_nav a {
+.panel_container .side_nav .links{
+  margin-top: 50px;
+}
+
+.panel_container .side_nav .links a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 20px;
-  color: #FFF;
+  color: #FFFFFF;
   display: block;
   transition: 0.3s;
   cursor: pointer;
 }
 
-.panel_container .side_nav a:hover {
+.panel_container .side_nav .links a:hover {
+  background-color: #FFFFFF;
   color: #111;
 }
 
@@ -36,6 +41,12 @@
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.panel_container .side_nav .close_button:hover {
+  color: #111;
 }
 
 .panel_container .modal_add_user {
@@ -62,20 +73,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-
-.panel_container .modal_delete_user {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  padding-top: 200px; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%;
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4); 
 }
 
 .panel_container .modal_add_user .modal_content form .input_field {
@@ -148,6 +145,20 @@
   font-weight: bold;
 }
 
+.panel_container .modal_delete_user {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 200px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+
 .panel_container .modal_delete_user .modal_content {
   background-color: #312D2D;
   margin: auto;
@@ -180,6 +191,102 @@
   border: none;
   padding: 10px; 
   background-color:#FF0000; 
+  color: #FFF; 
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.panel_container .modal_update_user {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 200px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+  
+.panel_container .modal_update_user .modal_content {
+  background-color: #312D2D;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 80%;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field {
+  position: relative;
+  width: 250px;
+  height: 44px;
+  line-height: 44px;
+  margin-bottom: 25px;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  transition: 0.2s all;
+  cursor: text;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #FFF;
+  box-shadow: none;
+  color: #FFFFFF;
+  background-color: #312D2D;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field input:invalid {
+  outline: 0;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field input:focus,
+.panel_container .modal_update_user .modal_content form .input-field input:valid {
+  border-color: #1E90FF;
+}
+
+.panel_container .modal_update_user .modal_content form .input_field input:focus~label,
+.panel_container .modal_update_user .modal_content form .input_field input:valid~label {
+  font-size: 14px;
+  top: -25px;
+  color: #1E90FF;
+}
+
+.panel_container .modal_update_user .modal_content .error{
+  margin-bottom: 15px; 
+  font-size: 13px; 
+  display: none;
+  color:#FF0000;
+}
+
+.panel_container .modal_update_user .modal_content .button_close_modal_update_user{
+  border: none; 
+  padding: 10px; 
+  margin-right: 10px; 
+  background-color: #FF0000; 
+  color: #FFF; 
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.panel_container .modal_update_user .modal_content .button_update_user{
+  border: none;
+  padding: 10px; 
+  background-color: #32CD32; 
   color: #FFF; 
   cursor: pointer; 
   font-weight: bold;
@@ -334,6 +441,13 @@
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+@media screen and (max-height: 800px) {
+
+  .panel_container .side_nav {padding-top: 15px;}
+  .panel_container .side_nav a {font-size: 18px;}
+
 }
 
 
